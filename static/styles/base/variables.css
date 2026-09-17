@@ -1,0 +1,24 @@
+:root {
+    --tablet-breakpoint: 768px;
+    --desktop-breakpoint: 1024px;
+
+    --clr-primary-green: #3B7A57;
+    --clr-secondary-green: #4A7C59;
+    --clr-muted-dark-green: #628F7A;
+    --clr-light-green: #B6EDC2;
+    --clr-ligthest-green: rgb(182, 237, 194, 0.4);
+    --clr-tertiary-orange: #D97706;
+    --clr-light-orange: #FFDCC3;
+    --clr-neutral-black: #1E293B;
+    --clr-off-white: #F9F9FF;
+    --clr-light-blue-1: #F0F3FF;
+    --clr-light-blue-2: #DEE8FF;
+    --clr-light-grey: #ccc;
+    --clr-lightest-grey: #eee;
+
+    --btn-border-radius: 0.5em;
+
+    --box-shadow: 0 0.1em 0.1em rgba(30, 41, 59, 0.1);
+    --box-shadow-down-right: 0.1em 0.1em 0.1em rgba(30, 41, 59, 0.1);
+    --box-shadow-up: 0 -0.1em 0.5em rgba(30, 41, 59, 0.1);
+}

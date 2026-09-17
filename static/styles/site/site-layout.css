@@ -1,0 +1,26 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    @media (max-width: 767px) {
+        padding-bottom: 5.5em;
+    }
+}
+
+.container {
+    margin-inline: 1.2em;
+}
+
+.site-content {
+    background-color: var(--clr-off-white);
+    flex-grow: 1;
+}
+
+.site-footer {
+    padding: 1em;
+}
+
+.hidden {
+    display: none;
+}

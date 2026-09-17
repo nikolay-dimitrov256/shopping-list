@@ -1,0 +1,21 @@
+.main-header .container {
+    display: flex;
+    gap: 2em;
+    align-items: center;
+    margin-block: 1em;
+}
+
+
+
+
+
+
+
+
+
+.logo {
+    display: block;
+    background-color: rgb(182, 237, 194, 0.4);
+    padding: 0.5em;
+    border-radius: var(--btn-border-radius);
+}

@@ -1,0 +1,18 @@
+.tag {
+    display: inline-flex;
+    gap: 0.2em;
+    align-items: center;
+    line-height: 1;
+    background-color: var(--clr-light-blue-2);
+    padding: 0.4em 0.8em;
+    border-radius: 2em;
+    color: var(--clr-neutral-black);
+}
+
+.tag span {
+    line-height: 1;
+}
+
+.tag-urgent {
+    background-color: var(--clr-light-orange);
+}
