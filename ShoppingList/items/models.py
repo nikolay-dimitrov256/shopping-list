@@ -11,6 +11,7 @@ class ShoppingList(models.Model):
         to=UserModel,
         on_delete=models.CASCADE,
         primary_key=True,
+        related_name='shopping_list'
     )
 
     def __str__(self):
