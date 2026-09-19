@@ -56,6 +56,11 @@ class Item(models.Model):
         default=False,
     )
 
+    is_archived = models.BooleanField(
+        verbose_name='архивиран',
+        default=False,
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True,
     )
@@ -78,15 +83,16 @@ class Item(models.Model):
     store = models.ForeignKey(
         verbose_name='магазин',
         to='stores.Store',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name='items',
         null=True,
         blank=True,
     )
 
-    category = models.ManyToManyField(
+    category = models.ForeignKey(
         verbose_name='категория',
         to='Category',
+        on_delete=models.SET_NULL,
         related_name='items',
         null=True,
         blank=True,
