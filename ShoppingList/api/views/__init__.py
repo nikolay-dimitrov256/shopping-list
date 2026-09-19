@@ -1,0 +1,1 @@
+from ShoppingList.api.views.items import *

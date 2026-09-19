@@ -231,6 +231,7 @@
 
     @media (min-width: 1024px) {
         display: inline-flex;
+        justify-self: start;
     }
 }
 

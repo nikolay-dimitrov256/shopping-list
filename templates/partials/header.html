@@ -84,4 +84,8 @@
             </ul>
         </nav>
     </div>
+
+    <form id="logout-form" method="post" style="display: none;">
+        {% csrf_token %}
+    </form>
 </header>
