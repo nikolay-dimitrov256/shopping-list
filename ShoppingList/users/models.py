@@ -45,7 +45,12 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
     def __str__(self):
-        return self.email
+        full_name = self.profile.get_full_name()
+
+        if full_name:
+            return full_name
+
+        return f'{self.email}'
 
 
 class Profile(models.Model):

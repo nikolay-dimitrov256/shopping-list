@@ -22,3 +22,10 @@ class Store(models.Model):
         null=True,
         blank=True,
     )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'магазин'
+        verbose_name_plural = 'магазини'
