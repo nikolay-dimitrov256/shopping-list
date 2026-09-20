@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from django.views.generic.dates import timezone_today
 
+from ShoppingList.items.forms import ItemCreateForm, ItemEditForm
 from ShoppingList.items.models import Item
 
 
@@ -35,5 +36,8 @@ class DashboardView(LoginRequiredMixin, ListView):
         bought_items = self.object_list.filter(is_bought=True)
         context['pending_items'] = pending_items
         context['bought_items'] = bought_items
+
+        context['add_form'] = ItemCreateForm()
+        context['edit_form'] = ItemEditForm()
 
         return context

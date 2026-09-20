@@ -2,6 +2,13 @@ window.addEventListener('DOMContentLoaded', initPage);
 
 function initPage() {
     initItemCheckboxes();
+
+    initAddForm();
+
+    const addForm = document.getElementById('add-item-form');
+    const formOverlay = addForm.parentElement;
+    document.body.append(formOverlay);
+
 }
 
 function initItemCheckboxes() {
@@ -78,4 +85,14 @@ function recalculateSummary(isBought) {
 
     summaryPendingSpanElement.textContent = pending;
     summaryBoughtSpanElement.textContent = bought;
+}
+
+function initAddForm() {
+    const addButton = document.querySelector('.add-button');
+    const addForm = document.getElementById('add-item-form');
+    const formOverlay = addForm.parentElement;
+
+    addButton.addEventListener('click', () => {
+        document.body.append(formOverlay);
+    });
 }

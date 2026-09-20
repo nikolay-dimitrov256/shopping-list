@@ -32,6 +32,12 @@
     }
 }
 
+.btn-add-another {
+    background-color: var(--clr-light-green);
+    border-color: var(--clr-primary-green);
+    color: #000;
+}
+
 .btn-breadcrumb-back {
     border-radius: 100vh;
     padding: 0.2em 0.6em;
@@ -53,6 +59,11 @@
 .btn-secondary:hover {
     background-color: var(--clr-muted-dark-green);
     border-color: var(--clr-muted-dark-green);
+    color: #fff;
+}
+
+.btn-add-another:hover {
+    background-color: var(--clr-muted-dark-green);
     color: #fff;
 }
 

@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'rest_framework'
+    'rest_framework',
 ] + PROJECT_APPS
 
 MIDDLEWARE = [
@@ -77,9 +77,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = 'ShoppingList.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
