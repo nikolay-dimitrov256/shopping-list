@@ -4,6 +4,8 @@ function initPage() {
     initActionsToggles();
 
     initMenuToggle();
+
+    initBooleanRanges();
 }
 
 function initActionsToggles() {
@@ -42,5 +44,16 @@ function initMenuToggle() {
             menuToggle.checked = false;
             addButton.classList.remove('menu-toggle-checked');
         }
+    });
+}
+
+function initBooleanRanges() {
+    const ranges = document.querySelectorAll('.boolean-range');
+
+    ranges.forEach(range => {
+        range.addEventListener('input', () => {
+            range.classList.toggle('on', range.value === '1');
+            console.log(range.value);
+        });
     });
 }

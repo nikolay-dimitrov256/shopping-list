@@ -3,3 +3,56 @@ input[type=checkbox] {
     cursor: pointer;
     outline: 4px solid var(--clr-light-blue-1);
 }
+
+.boolean-range {
+    appearance: none;
+    width: 2em;
+    background: transparent;
+}
+
+.boolean-range::-webkit-slider-thumb {
+    appearance: none;
+    width: 1em;
+    height: 1em;
+    border-radius: 2em;
+    background: #fff;
+    cursor: pointer;
+    box-sizing: content-box;
+}
+
+.boolean-range::-moz-range-thumb {
+    appearance: none;
+    width: 1em;
+    height: 1em;
+    border: none;
+    border-radius: 2em;
+    background: #fff;
+    cursor: pointer;
+    box-sizing: content-box;
+}
+
+.boolean-range::-webkit-slider-runnable-track {
+    width: 2em;
+    /* height: 1.2em; */
+    cursor: pointer;
+    background: #999;
+    border-radius: 2em;
+    padding: 0.1em;
+}
+
+.boolean-range::-moz-range-track {
+    width: 2em;
+    height: 1em;
+    cursor: pointer;
+    background: #999;
+    border-radius: 2em;
+    padding: 0.1em;
+}
+
+.boolean-range.on::-webkit-slider-runnable-track {
+    background: #A75A00;
+}
+
+.boolean-range.on::-moz-range-track {
+    background: #A75A00;
+}

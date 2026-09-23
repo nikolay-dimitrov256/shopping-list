@@ -12,6 +12,8 @@ class ItemBaseForm(forms.ModelForm):
                 'min': 0,
                 'max': 1,
                 'step': 1,
+                'class': 'boolean-range',
+                'value': 0,
             }
         )
     )
