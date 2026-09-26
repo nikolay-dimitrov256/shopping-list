@@ -53,12 +53,12 @@ fieldset label {
     padding: 0.4em 0.8em;
     border-radius: 2em;
     color: var(--clr-neutral-black);
+    cursor: pointer;
 }
 
 fieldset label.selected {
     background-color: var(--clr-primary-green);
     color: #fff;
-    font-weight: 500;
 }
 
 #id_create-category,
