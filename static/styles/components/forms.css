@@ -1,4 +1,106 @@
 form {
-    background-color: var(--clr-off-white);
+    background-color: #fff;
     padding: 1em;
+}
+
+form header {
+    display: grid;
+    grid-template-columns: 1fr 2em;
+    margin-bottom: 1em;
+}
+
+form h2 {
+    line-height: 1;
+    font-weight: 500;
+}
+
+form header .close {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    justify-self: end;
+}
+
+.fieldWrapper {
+    margin-bottom: 1em;
+}
+
+.fieldWrapper > * {
+    display: block;
+}
+
+form label,
+form legend {
+    font-weight: 500;
+}
+
+.quantity-unit-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+}
+
+fieldset {
+    border: none;
+}
+
+fieldset label {
+    font-weight: normal;
+    line-height: 1;
+    display: inline-flex;
+    gap: 0.2em;
+    align-items: center;
+    background-color: var(--clr-light-blue-2);
+    padding: 0.4em 0.8em;
+    border-radius: 2em;
+    color: var(--clr-neutral-black);
+}
+
+fieldset label.selected {
+    background-color: var(--clr-primary-green);
+    color: #fff;
+    font-weight: 500;
+}
+
+#id_create-category,
+#id_edit-category {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6em;
+}
+
+.urgent-wrapper {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--clr-light-blue-1);
+    padding: 0.8em 1em;
+    border-radius: 0.5em;
+}
+
+form .buttons {
+    justify-content: flex-end;
+}
+
+
+form .buttons .button:first-child {
+    margin-right: auto;
+}
+
+.form-overlay {
+    z-index: 11;
+}
+
+.add-form,
+.edit-form {
+    @media (max-width: 767px) {
+        position: absolute;
+        top: 3em;
+    }
+
+    @media (min-width: 768px) {
+        max-width: 40em;
+    }
+
+    @media (min-width: 1024px) {
+        max-width: 55em;
+    }
 }

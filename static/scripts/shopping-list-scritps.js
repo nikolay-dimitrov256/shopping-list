@@ -5,10 +5,12 @@ function initPage() {
 
     initAddForm();
 
-    const addForm = document.getElementById('add-item-form');
-    const formOverlay = addForm.parentElement;
+    // const addForm = document.getElementById('add-item-form');
+    // const formOverlay = addForm.parentElement;
+    // document.body.append(formOverlay);
+    const editForm = document.getElementById('edit-item-form');
+    const formOverlay = editForm.parentElement;
     document.body.append(formOverlay);
-
 }
 
 function initItemCheckboxes() {

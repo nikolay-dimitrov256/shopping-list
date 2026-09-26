@@ -17,6 +17,10 @@
     font-weight: 600;
 }
 
+form .button {
+    padding: 0.4em 1em;
+}
+
 .btn-primary {
     background-color: var(--clr-primary-green);
     color: #fff;
@@ -32,9 +36,14 @@
     }
 }
 
+.btn-cancel {
+    background-color: var(--clr-light-blue-1);
+    border-color: var(--clr-light-blue-1);
+}
+
 .btn-add-another {
     background-color: var(--clr-light-green);
-    border-color: var(--clr-primary-green);
+    border-color: var(--clr-light-green);
     color: #000;
 }
 
@@ -64,7 +73,13 @@
 
 .btn-add-another:hover {
     background-color: var(--clr-muted-dark-green);
+    border-color: var(--clr-muted-dark-green);
     color: #fff;
+}
+
+.btn-cancel:hover{
+    background-color: var(--clr-light-blue-2);
+    border-color: var(--clr-light-blue-2);
 }
 
 .btn-breadcrumb-back:hover {
@@ -91,4 +106,10 @@
             bottom: 14em;
         }
     }
+}
+
+.quantity-plus,
+.quantity-minus {
+    border: none;
+    background-color: transparent;
 }

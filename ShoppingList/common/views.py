@@ -37,7 +37,11 @@ class DashboardView(LoginRequiredMixin, ListView):
         context['pending_items'] = pending_items
         context['bought_items'] = bought_items
 
-        context['add_form'] = ItemCreateForm()
-        context['edit_form'] = ItemEditForm()
+        context['add_form'] = ItemCreateForm(
+            prefix='create'
+        )
+        context['edit_form'] = ItemEditForm(
+            prefix='edit'
+        )
 
         return context

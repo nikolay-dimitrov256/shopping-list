@@ -1,12 +1,13 @@
 from django import forms
 
 from ShoppingList.common.forms import RangeInput
-from ShoppingList.items.models import Item
+from ShoppingList.items.models import Item, Category
+from ShoppingList.stores.models import Store
 
 
 class ItemBaseForm(forms.ModelForm):
     is_urgent = forms.BooleanField(
-        label='Спешно',
+        label='Отбележи, като спешно',
         widget=RangeInput(
             attrs={
                 'min': 0,
@@ -16,6 +17,20 @@ class ItemBaseForm(forms.ModelForm):
                 'value': 0,
             }
         )
+    )
+
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        label='Категория:',
+        widget=forms.RadioSelect(
+
+        )
+    )
+
+    store = forms.ModelChoiceField(
+        queryset=Store.objects.all(),
+        empty_label='- Избери магазин -',
+        label='Магазин',
     )
     class Meta:
         model = Item

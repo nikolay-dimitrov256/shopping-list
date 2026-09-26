@@ -18,3 +18,7 @@ a {
 body, button, table, form, input, select {
     font: inherit;
 }
+
+p {
+    color: var(--clr-neutral-black);
+}

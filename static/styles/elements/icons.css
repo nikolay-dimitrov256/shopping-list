@@ -69,3 +69,16 @@
         margin: 0 auto;
     }
 }
+
+.close svg {
+    stroke-width: 2px;
+}
+
+.close {
+    padding: 0.2em;
+}
+
+.close:active {
+    background-color: var(--clr-light-blue-2);
+    border-radius: 2em;
+}

@@ -56,3 +56,71 @@ input[type=checkbox] {
 .boolean-range.on::-moz-range-track {
     background: #A75A00;
 }
+
+input,
+select {
+    font-weight: 500;
+}
+
+input[type=text],
+input[type=number],
+textarea,
+select {
+    background-color: var(--clr-light-blue-1);
+    border: none;
+    padding: 0.6em 0.6em;
+    border-radius: 0.5em;
+    width: 100%;
+}
+
+input[type=text]:focus,
+input[type=number]:focus,
+textarea:focus,
+select:focus {
+    background-color: var(--clr-light-blue-2);
+    outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    text-align: center;
+}
+
+.quantity-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.quantity-plus,
+.quantity-minus {
+    position: absolute;
+    padding: 0.4em 0.8em;
+    cursor: pointer;
+    border-radius: 0.5em;
+    font-weight: 500;
+}
+
+.quantity-plus:active,
+.quantity-minus:active {
+    background-color: var(--clr-light-blue-2);
+}
+
+.quantity-plus {
+    right: 0;
+}
+
+.quantity-minus {
+    left: 0;
+    padding-inline: 0.94em;
+}
+
+input[type=radio] {
+    display: none;
+}
