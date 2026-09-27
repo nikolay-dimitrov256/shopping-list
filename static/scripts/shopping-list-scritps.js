@@ -102,7 +102,7 @@ function initAddForm() {
     const formOverlay = addForm.parentElement;
     
     addButton.addEventListener('click', () => {
-        document.body.append(formOverlay);
+        formOverlay.classList.add('open');
     });
 }
 
@@ -125,12 +125,10 @@ function initFormOverlays() {
 }
 
 function hideOverlay(overlay) {
-    if (!overlay) {
-        return;
-    }
-    
-    const hiddenDivElement = document.querySelector('.hidden');
-    hiddenDivElement.append(overlay);
+    const form = overlay.querySelector('form');
+
+    form.reset();
+    overlay.classList.remove('open');
 }
 
 function initCategoryLabels() {
@@ -191,7 +189,7 @@ function initQuantityButtons() {
 
         function stopHolding() {
             clearTimeout(holdTimeout);
-            clearTimeout(holdInterval);
+            clearInterval(holdInterval);
         }
     })
 }

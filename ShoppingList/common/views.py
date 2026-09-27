@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, Q
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView
 from django.views.generic.dates import timezone_today
 
@@ -14,10 +14,11 @@ class DashboardView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         items = (Item.objects
-        .filter(
+            .filter(
             shopping_list=self.request.user.shopping_list,
             is_archived=False,
         )
+            .order_by('-is_urgent')
         )
 
         return items
@@ -37,11 +38,35 @@ class DashboardView(LoginRequiredMixin, ListView):
         context['pending_items'] = pending_items
         context['bought_items'] = bought_items
 
-        context['add_form'] = ItemCreateForm(
-            prefix='create'
-        )
+        if 'add_form' not in context:
+            context['add_form'] = ItemCreateForm(
+                user=self.request.user,
+                prefix='create',
+            )
         context['edit_form'] = ItemEditForm(
-            prefix='edit'
+            user=self.request.user,
+            prefix='edit',
         )
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        add_form = ItemCreateForm(
+            request.POST,
+            prefix='create',
+            user=request.user
+        )
+
+        if add_form.is_valid():
+            item = add_form.save(commit=False)
+            item.user = request.user
+            item.shopping_list = request.user.shopping_list
+            item.save()
+
+            return redirect('dashboard')
+
+        self.object_list = self.get_queryset()
+
+        context = self.get_context_data(add_form=add_form)
+        print(add_form.errors)
+        return self.render_to_response(context)

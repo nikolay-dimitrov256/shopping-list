@@ -1,4 +1,5 @@
 from django import forms
+from django.db.models import Q
 
 from ShoppingList.common.forms import RangeInput
 from ShoppingList.items.models import Item, Category
@@ -6,6 +7,15 @@ from ShoppingList.stores.models import Store
 
 
 class ItemBaseForm(forms.ModelForm):
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if user is None:
+            self.fields['store'].queryset = Store.objects.filter(is_global=True)
+        else:
+            self.fields['store'].queryset = Store.objects.filter(Q(is_global=True) | Q(user=user))
+
+
     is_urgent = forms.BooleanField(
         label='Отбележи, като спешно',
         widget=RangeInput(
@@ -16,21 +26,22 @@ class ItemBaseForm(forms.ModelForm):
                 'class': 'boolean-range',
                 'value': 0,
             }
-        )
+        ),
+        required=False,
     )
 
     category = forms.ModelChoiceField(
         queryset=Category.objects.all(),
         label='Категория:',
-        widget=forms.RadioSelect(
-
-        )
+        widget=forms.RadioSelect(),
+        required=False,
     )
 
     store = forms.ModelChoiceField(
-        queryset=Store.objects.all(),
+        queryset=Store.objects.none(),
         empty_label='- Избери магазин -',
         label='Магазин',
+        required=False,
     )
     class Meta:
         model = Item
