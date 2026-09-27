@@ -10,6 +10,8 @@ function initPage() {
     initCategoryLabels();
 
     initQuantityButtons();
+
+    initEditButtons();
     
     // const addForm = document.getElementById('add-item-form');
     // const formOverlay = addForm.parentElement;
@@ -17,7 +19,11 @@ function initPage() {
     
     // const editForm = document.getElementById('edit-item-form');
     // const formOverlay = editForm.parentElement;
-    // document.body.append(formOverlay);
+    // formOverlay.classList.add('open')
+}
+
+function getCsrfToken() {
+    return document.querySelector('input[name=csrfmiddlewaretoken]').value;
 }
 
 function initItemCheckboxes() {
@@ -26,8 +32,6 @@ function initItemCheckboxes() {
     shoppingListDivElenment.addEventListener('click', (event) => {
         if (event.target.classList.contains('bought-item-check')) {
             const item = event.target.parentElement.parentElement;
-            
-            moveBoughtItem(item);
             
             markItemAsBought(item);
         }
@@ -73,6 +77,8 @@ function markItemAsBought(itemElement) {
     .then(res => {
         if (res.ok) {
             recalculateSummary(checkboxElement.checked);
+
+            moveBoughtItem(itemElement);
         }
     })
     .catch(error => console.error(error));
@@ -192,4 +198,87 @@ function initQuantityButtons() {
             clearInterval(holdInterval);
         }
     })
+}
+
+function initEditButtons() {
+    const shoppingListDivElenment = document.querySelector('.shopping-list');
+
+    shoppingListDivElenment.addEventListener('click', (e) => {
+        // Get the edit button
+        const editButtonAElement = e.target.closest('.edit');
+        if (!editButtonAElement) {
+            return;
+        }
+
+        // Get the item element and item ID
+        const itemDivElement = editButtonAElement.parentElement.parentElement;
+        const itemId = itemDivElement.dataset.itemId;
+
+        // Fetch item data from server
+        const baseUrl = window.location.origin;
+        const fetchUrl = `${baseUrl}/api/items/${itemId}`;
+        const csrfToken = getCsrfToken();
+
+        fetch(fetchUrl,
+            {
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                credentials: 'same-origin'
+            }
+        )
+        .then(res => res.json())
+        .then(itemData => fillEditForm(itemData))
+        .catch(err => console.error(err));
+    })
+}
+
+function fillEditForm(itemData) {
+    const editFormOverlay = document.querySelector('.edit-form-overlay');
+    const editForm = editFormOverlay.querySelector('.edit-form');
+
+    // Get input elements
+    const nameInputElement = document.getElementById('id_edit-name');
+    const quantityInputElement = document.getElementById('id_edit-quantity');
+    const unitSelectElement = document.getElementById('id_edit-unit');
+    const categoryDivElement = document.getElementById('id_edit-category');
+    const storeSelectElement = document.getElementById('id_edit-store');
+    const isUrgentCheckboxElement = document.getElementById('id_edit-is_urgent');
+    const notesTextareaElement = document.getElementById('id_edit-notes');
+
+    // Fill in edit form
+    nameInputElement.value = itemData.name;
+    quantityInputElement.value = itemData.quantity;
+    unitSelectElement.value = itemData.unit;
+    setCategory(itemData.category, editForm);
+    storeSelectElement.value = itemData.store;
+    isUrgentCheckboxElement.value = Number(itemData['is_urgent']);
+    isUrgentCheckboxElement.classList.toggle('on', itemData['is_urgent']);
+    notesTextareaElement.value = itemData.notes;
+    
+    // Make edit from visible
+    editFormOverlay.classList.add('open');
+}
+
+function setCategory(categoryId, form) {
+    if (!categoryId) {
+        return;
+    }
+
+    const categoryWrapper = form.querySelector('.categories-wrapper');
+
+    categoryWrapper.querySelectorAll('label').forEach(label => {
+        label.classList.remove('selected');
+    });
+
+    const radio = categoryWrapper.querySelector(`input[value="${categoryId}"]`);
+
+    if (!radio) {
+        return;
+    }
+
+    radio.checked = true;
+    radio.closest('label').classList.add('selected');
 }
