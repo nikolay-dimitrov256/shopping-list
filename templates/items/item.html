@@ -24,7 +24,7 @@
         {% endif %}
         <p class="item-notes">{{ item.notes }}</p>
     </div>
-    <p class="item-quantity">{{ item.quantity }} {{ item.unit }}</p>
+    <p class="item-quantity">{{ item.quantity }} {{ item.get_unit_display }}</p>
 
     {% if item.category %}
     <p class="item-category tag">{{ item.category.name }}</p>
