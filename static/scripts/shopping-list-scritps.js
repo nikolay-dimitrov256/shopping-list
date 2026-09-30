@@ -12,6 +12,8 @@ function initPage() {
     initQuantityButtons();
 
     initEditButtons();
+
+    initEditForm();
     
     // const addForm = document.getElementById('add-item-form');
     // const formOverlay = addForm.parentElement;
@@ -135,6 +137,10 @@ function hideOverlay(overlay) {
 
     form.reset();
     overlay.classList.remove('open');
+
+    if (form.dataset.itemId) {
+        form.dataset.itemId = '';
+    }
 }
 
 function initCategoryLabels() {
@@ -260,6 +266,9 @@ function fillEditForm(itemData) {
     
     // Make edit from visible
     editFormOverlay.classList.add('open');
+
+    // Write item ID on form
+    editForm.dataset.itemId = itemData.id;
 }
 
 function setCategory(categoryId, form) {
@@ -281,4 +290,51 @@ function setCategory(categoryId, form) {
 
     radio.checked = true;
     radio.closest('label').classList.add('selected');
+}
+
+function initEditForm() {
+    const editForm = document.getElementById('edit-item-form');
+    const csrfToken = getCsrfToken();
+
+    editForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const data = formToJSON(editForm, 'edit-');
+        const itemId = editForm.dataset.itemId;
+        const baseUrl = window.location.origin;
+        const fetchUrl = `${baseUrl}/api/items/${itemId}/`;
+        
+        fetch(
+            fetchUrl,
+            {
+                method: 'PATCH',
+                headers: {
+                    'content-type': 'application/json',
+                    'X-CSRFToken': csrfToken,
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify(data),
+            }
+        ).then(res => {
+            if (res.ok) {
+                window.location.reload();
+            }
+        }).catch(err => console.error(err));
+    })
+}
+
+function formToJSON(form, prefix = '') {
+    const formData = new FormData(form);
+
+    const data = Object.fromEntries(
+        [...formData.entries()].map(([key, value]) => {
+            if (!prefix) {
+                return [key, value];
+            }
+
+            key = key.replace(new RegExp(`^${prefix}`), '');
+            return [key, value];
+        })
+    );
+
+    return data;
 }
