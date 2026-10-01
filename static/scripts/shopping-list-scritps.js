@@ -141,12 +141,17 @@ function initFormOverlays() {
 function hideOverlay(overlay) {
     const form = overlay.querySelector('form');
 
+    // Clear the form and hide the overlay
     form.reset();
     overlay.classList.remove('open');
 
+    // Eraze the item ID from form
     if (form.dataset.itemId) {
         form.dataset.itemId = '';
     }
+
+    // Remove the add parameter from query string
+    removeQueryParam('add');
 }
 
 function initCategoryLabels() {
@@ -407,6 +412,11 @@ function deleteItem(itemId) {
                 window.location.reload();
             }
         })
-        .catch(err => console.error(err));
-    
+        .catch(err => console.error(err));   
+}
+
+function removeQueryParam(param) {
+    const url = new URL(window.location.href);
+    url.searchParams.delete(param);
+    history.replaceState(null, '', url);
 }

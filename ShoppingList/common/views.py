@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, Q
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic import TemplateView, ListView
 from django.views.generic.dates import timezone_today
 
@@ -63,10 +64,15 @@ class DashboardView(LoginRequiredMixin, ListView):
             item.shopping_list = request.user.shopping_list
             item.save()
 
+            action = request.POST.get('action')
+
+            if action == 'save_and_add':
+                return redirect(f'{reverse("dashboard")}?add=1')
+
             return redirect('dashboard')
 
         self.object_list = self.get_queryset()
 
         context = self.get_context_data(add_form=add_form)
-        print(add_form.errors)
+
         return self.render_to_response(context)
