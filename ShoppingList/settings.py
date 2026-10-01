@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 
 from pathlib import Path
 
-from django.conf.global_settings import STATICFILES_DIRS, AUTH_USER_MODEL
+from django.conf.global_settings import STATICFILES_DIRS, AUTH_USER_MODEL, LOGIN_REDIRECT_URL, LOGOUT_REDIRECT_URL
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -112,6 +113,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'users.AppUser'
+LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
+LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/

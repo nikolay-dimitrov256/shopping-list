@@ -3,6 +3,7 @@
 
     @media (min-width: 768px) {
         display: block;
+        width: 100%;
     }
 }
 
@@ -16,6 +17,7 @@
     padding: 0.6em 0.8em;
     font-weight: 600;
     border-radius: var(--btn-border-radius);
+    display: block;
 }
 
 .main-nav li.selected a {
@@ -24,6 +26,16 @@
 
 .main-nav a:hover {
     background-color: var(--clr-ligthest-green);
+}
+
+.main-nav .account {
+    display: flex;
+    margin-left: auto;
+}
+
+.main-nav .account a {
+    display: flex;
+    gap: 0.2em;
 }
 
 .mobile-nav {
