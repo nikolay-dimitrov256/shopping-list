@@ -11,10 +11,12 @@
 .button {
     display: flex;
     gap: 0.5em;
+    justify-content: center;
     border-radius: var(--btn-border-radius);
     padding: 0.8em 0.6em;
     border: 2px solid #000;
     font-weight: 600;
+    transition: all 0.2s ease-in;
 }
 
 form .button {
@@ -45,6 +47,12 @@ form .button {
     background-color: var(--clr-light-green);
     border-color: var(--clr-light-green);
     color: #000;
+}
+
+.btn-error {
+    background-color: var(--clr-error);
+    border-color: var(--clr-error);
+    color: #fff;
 }
 
 .btn-breadcrumb-back {
@@ -80,6 +88,11 @@ form .button {
 .btn-cancel:hover{
     background-color: var(--clr-light-blue-2);
     border-color: var(--clr-light-blue-2);
+}
+
+.btn-error:hover {
+    background-color: var(--clr-error-text);
+    border-color: var(--clr-error-text);
 }
 
 .btn-breadcrumb-back:hover {

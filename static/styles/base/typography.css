@@ -22,3 +22,7 @@ body, button, table, form, input, select {
 p {
     color: var(--clr-neutral-black);
 }
+
+.error-message {
+    color: var(--clr-error-text);
+}

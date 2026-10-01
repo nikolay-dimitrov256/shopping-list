@@ -14,6 +14,10 @@ function initPage() {
     initEditButtons();
 
     initEditForm();
+
+    initDeleteButtons();
+
+    initDeleteForm();
     
     // const addForm = document.getElementById('add-item-form');
     // const formOverlay = addForm.parentElement;
@@ -22,6 +26,8 @@ function initPage() {
     // const editForm = document.getElementById('edit-item-form');
     // const formOverlay = editForm.parentElement;
     // formOverlay.classList.add('open')
+
+    // document.querySelector('.delete-form-overlay').classList.add('open');
 }
 
 function getCsrfToken() {
@@ -337,4 +343,70 @@ function formToJSON(form, prefix = '') {
     );
 
     return data;
+}
+
+function initDeleteButtons() {
+    const shoppingListDivElenment = document.querySelector('.shopping-list');
+
+    shoppingListDivElenment.addEventListener('click', (e) => {
+        // Get the delete button
+        const deleteButtonAElement = e.target.closest('.delete');
+        if (!deleteButtonAElement) {
+            return;
+        }
+
+        // Show the delete form overlay
+        const deleteFormOverlay = document.querySelector('.delete-form-overlay');
+        deleteFormOverlay.classList.add('open');
+
+        // Get the item element and item ID
+        const itemDivElement = deleteButtonAElement.parentElement.parentElement;
+        const itemId = itemDivElement.dataset.itemId;
+
+        // Write item ID on delete form
+        const deleteForm = document.getElementById('item-delete-form');
+        deleteForm.dataset.itemId = itemId;
+    });
+}
+
+function initDeleteForm() {
+    // Get the delete form
+    const deleteForm = document.getElementById('item-delete-form');
+
+    deleteForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const itemId = deleteForm.dataset.itemId;
+
+        if (!itemId) {
+            return;
+        }
+
+        deleteItem(itemId);
+        
+    })
+}
+
+function deleteItem(itemId) {
+        const baseUrl = window.location.origin;
+        const fetchUrl = `${baseUrl}/api/items/${itemId}/`;
+        const csrfToken = getCsrfToken();
+
+        fetch(
+            fetchUrl,
+            {
+                method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                credentials: 'same-origin',
+            }
+        )
+        .then(res => {
+            if (res.ok) {
+                window.location.reload();
+            }
+        })
+        .catch(err => console.error(err));
+    
 }

@@ -1,0 +1,5 @@
+.warning {
+    background-color: var(--clr-warning-background);
+    border: 1px solid var(--clr-warning-border);
+    border-radius: var(--btn-border-radius);
+}

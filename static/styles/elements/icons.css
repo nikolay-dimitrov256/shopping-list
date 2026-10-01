@@ -1,3 +1,7 @@
+svg {
+    transition: color 0.2s ease-in;
+}
+
 .icon-sm {
     width: 0.8em;
     height: auto;
@@ -81,4 +85,12 @@
 .close:active {
     background-color: var(--clr-light-blue-2);
     border-radius: 2em;
+}
+
+a.delete svg:hover {
+    color: var(--clr-error);
+}
+
+a.edit svg:hover {
+    color: var(--clr-primary-green);
 }

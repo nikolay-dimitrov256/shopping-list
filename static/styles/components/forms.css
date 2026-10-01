@@ -1,6 +1,7 @@
 form {
     background-color: #fff;
     padding: 1em;
+    border-radius: 1em;
 }
 
 form header {
@@ -76,12 +77,14 @@ fieldset label.selected {
     border-radius: 0.5em;
 }
 
-form .buttons {
+add-form .buttons,
+edit-form .buttons {
     justify-content: flex-end;
 }
 
 
-form .buttons .button:first-child {
+add-form .buttons .button:first-child,
+edit-form .buttons .button:first-child {
     margin-right: auto;
 }
 
@@ -103,4 +106,55 @@ form .buttons .button:first-child {
     @media (min-width: 1024px) {
         max-width: 55em;
     }
+}
+
+.delete-form {
+    text-align: center;
+}
+
+.delete-form .warning {
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    row-gap: 0.5em;
+    padding: 1em;
+    margin-bottom: 1.4rem;
+}
+
+.delete-form .warning .icon {
+    color: var(--clr-error);
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    align-self: center;
+}
+
+.delete-form .warning p {
+    grid-column: 2 / 3;
+    line-height: 1;
+}
+
+.delete-form > .icon {
+    box-sizing: content-box;
+    color: var(--clr-error);
+    background-color: var(--clr-warning-background);
+    border-radius: 100vw;
+    padding: 1em;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
+
+.delete-form h2 {
+    margin-bottom: 0.5rem;
+}
+
+.delete-form > p {
+    margin-bottom: 1rem;
+}
+
+.delete-form .buttons {
+    /* justify-content: stretch; */
+}
+
+.delete-form .buttons .button {
+    flex-grow: 1;
+    flex-basis: 50%;
 }

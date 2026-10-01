@@ -1,5 +1,7 @@
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
+from django.views.generic import DeleteView
 
 from ShoppingList.items.models import Item
 
@@ -10,3 +12,8 @@ def archive_items_view(request):
     items.update(is_archived=True)
 
     return redirect('dashboard')
+
+
+class DeleteItemView(DeleteView):
+    model = Item
+    success_url = reverse_lazy('dashboard')

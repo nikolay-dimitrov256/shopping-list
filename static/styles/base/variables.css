@@ -15,6 +15,10 @@
     --clr-light-blue-2: #DEE8FF;
     --clr-light-grey: #ccc;
     --clr-lightest-grey: #eee;
+    --clr-error: #DC2626;
+    --clr-error-text: #B91C1C;
+    --clr-warning-background: #FEF7F7;
+    --clr-warning-border: #FEE2E2;
 
     --btn-border-radius: 0.5em;
 
