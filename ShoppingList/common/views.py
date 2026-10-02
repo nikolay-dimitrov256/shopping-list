@@ -9,7 +9,7 @@ from ShoppingList.items.forms import ItemCreateForm, ItemEditForm
 from ShoppingList.items.models import Item
 
 
-class DashboardView(LoginRequiredMixin, ListView):
+class DashboardView(ListView):
     model = Item
     template_name = 'common/dashboard.html'
 

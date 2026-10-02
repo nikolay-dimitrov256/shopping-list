@@ -12,8 +12,3 @@ def archive_items_view(request):
     items.update(is_archived=True)
 
     return redirect('dashboard')
-
-
-class DeleteItemView(DeleteView):
-    model = Item
-    success_url = reverse_lazy('dashboard')

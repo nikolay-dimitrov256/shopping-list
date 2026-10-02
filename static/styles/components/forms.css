@@ -158,3 +158,8 @@ edit-form .buttons .button:first-child {
     flex-grow: 1;
     flex-basis: 50%;
 }
+
+.user-form {
+    max-width: 30em;
+    margin: auto;
+}

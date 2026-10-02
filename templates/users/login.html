@@ -10,14 +10,17 @@
 {% include 'partials/header.html' %}
 
 <main class="site-content">
-    <form action="{% url 'login' %}" method="post">
+    <form class="user-form" action="{% url 'login' %}" method="post">
         {% csrf_token %}
-
+        
         {{ form }}
         <button class="button btn-primary">
             <span>Влез</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon icon-md">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
         </button>
-
+        <p>Нямате акаунт? <a href="{% url 'register' %}">Регистрация</a></p>
     </form>
 </main>
 
