@@ -1,0 +1,30 @@
+.site-footer {
+    padding: 1em;
+}
+
+.site-footer a {
+    color: var(--clr-primary-green);
+    transition: color 0.2s ease-in;
+    position: relative;
+}
+
+.site-footer a::after {
+    content: '';
+    width: 0;
+    height: 2px;
+    background-color: var(--clr-muted-dark-green);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    transition: width 0.2s ease-in;
+}
+
+.site-footer a:hover{
+    color: var(--clr-muted-dark-green);
+}
+
+.site-footer a:hover::after {
+    width: 100%;
+}

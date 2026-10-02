@@ -17,10 +17,6 @@ body {
     flex-grow: 1;
 }
 
-.site-footer {
-    padding: 1em;
-}
-
 .hidden {
     display: none;
 }
