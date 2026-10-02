@@ -161,5 +161,45 @@ edit-form .buttons .button:first-child {
 
 .user-form {
     max-width: 30em;
-    margin: auto;
+    padding: 2em;
+}
+
+.user-form h2,
+.user-form p {
+    text-align: center;
+}
+
+.user-form h2 {
+    margin-bottom: 1rem;
+}
+
+.user-form > .icon {
+    margin: 0 auto;
+    padding: 0.5em;
+    background-color: var(--clr-ligthest-green);
+    border-radius: 100vw;
+    margin-bottom: 1em;
+}
+
+.user-form div {
+    margin-bottom: 1em;
+}
+
+.user-form .button {
+    width: 100%;
+    margin-bottom: 2em;
+    margin-top: 1.5em;
+}
+
+.user-form a {
+    color: var(--clr-primary-green);
+}
+
+.user-form a:hover {
+    color: var(--clr-muted-dark-green);
+    text-decoration: underline;
+}
+
+.user-form .helptext {
+    opacity: 0.6;
 }

@@ -1,0 +1,5 @@
+.login-page,
+.register-page {
+    display: grid;
+    place-items: center;
+}
