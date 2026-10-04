@@ -14,7 +14,7 @@ from pathlib import Path
 from decouple import config
 
 from django.conf.global_settings import STATICFILES_DIRS, AUTH_USER_MODEL, LOGIN_REDIRECT_URL, LOGOUT_REDIRECT_URL, \
-    CSRF_COOKIE_SECURE
+    CSRF_COOKIE_SECURE, CSRF_TRUSTED_ORIGINS
 from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,8 +31,10 @@ SECRET_KEY = config('SECRET_KEY', 'lol secret')
 DEBUG = config('DEBUG', 'debug', cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', 'hosts').split(',')
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', 'trusted_origins').split(',')
 
 CSRF_COOKIE_SECURE=True
+SESSION_COOKIE_SECURE=True
 
 
 # Application definition
