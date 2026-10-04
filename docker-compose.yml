@@ -1,0 +1,48 @@
+services:
+
+  db:
+    image: postgres:18-alpine
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: always
+
+  app:
+    build: .
+    image: shopping-list
+    env_file:
+      - .env
+    container_name: shopping-list-container
+    volumes:
+      - staticfiles_volume:/app/staticfiles
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+  
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - './nginx/nginx.conf:/etc/nginx/nginx.conf'
+      - staticfiles_volume:/app/staticfiles
+    depends_on:
+      - app
+    restart: always
+
+volumes:
+  postgres_data:
+  staticfiles_volume:

@@ -8,26 +8,24 @@ ENV PYTHONUNBUFFERED=1
 # Set the working directory
 WORKDIR /app
 
+# Install system dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends gosu \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copy the requirements file and install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN useradd -m -r appuser && mkdir /app && chown -R appuser /app
-
 # Copy the rest of the application code
 COPY . .
 
-# Run database migrations
-RUN python manage.py migrate --noinput
-
-# Collect static files
-RUN python manage.py collectstatic --noinput
-
-# Switch to the non-root user
-USER appuser
+RUN useradd -m -r appuser && chown -R appuser /app && chmod +x /app/scripts/entrypoint.sh
 
 # Expose the port the app runs on
 EXPOSE 8000
 
+ENTRYPOINT ["/app/scripts/entrypoint.sh"]
+
 # Set the entry point for the container
-CMD ["python", "app.py"]
+CMD ["gunicorn", "ShoppingList.wsgi:application", "--workers", "5", "--bind", "0.0.0.0:8000"]

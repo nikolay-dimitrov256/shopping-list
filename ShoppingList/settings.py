@@ -9,10 +9,12 @@ https://docs.djangoproject.com/en/6.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
-
+import os
 from pathlib import Path
+from decouple import config
 
-from django.conf.global_settings import STATICFILES_DIRS, AUTH_USER_MODEL, LOGIN_REDIRECT_URL, LOGOUT_REDIRECT_URL
+from django.conf.global_settings import STATICFILES_DIRS, AUTH_USER_MODEL, LOGIN_REDIRECT_URL, LOGOUT_REDIRECT_URL, \
+    CSRF_COOKIE_SECURE
 from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,12 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*4-16hp19ga_@2_-t)xvnp0$zvp%pl+zbyox+x4u(8kh%+p@_9'
+SECRET_KEY = config('SECRET_KEY', 'lol secret')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', 'debug', cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', 'hosts').split(',')
+
+CSRF_COOKIE_SECURE=True
 
 
 # Application definition
@@ -86,14 +90,55 @@ TEMPLATES = [
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "shopping_list_db",
-        "USER": "postgres",
-        "PASSWORD": "admin",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "NAME": config('DB_NAME', 'db_name'),
+        "USER": config('DB_USER', 'db_user'),
+        "PASSWORD": config('DB_PASSWORD', 'db_password'),
+        "HOST": os.environ.get('DB_HOST', config('DB_HOST_DEV', 'db_host')),
+        "PORT": config('DB_PORT', 'db_port'),
     }
 }
 
+LOG_DIR = BASE_DIR / 'logs'
+os.makedirs(LOG_DIR, exist_ok=True)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'level': 'WARNING',
+        },
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOG_DIR, 'django.log'),
+        }
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'ERROR',  # Other levels CRITICAL, ERROR, WARNING, INFO, DEBUG
+        'propagate': True,
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        # Project specific logger (optional)
+        'fashionShop': {
+            'handlers': ['console', 'file'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.db.backends': {  # responsible for the sql logs
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
@@ -123,7 +168,7 @@ LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
 LANGUAGE_CODE = 'bg'
 
-TIME_ZONE = 'EET'
+TIME_ZONE = 'Europe/Sofia'
 
 USE_I18N = True
 
@@ -137,7 +182,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
