@@ -39,6 +39,8 @@ services:
     volumes:
       - './nginx/nginx.conf:/etc/nginx/nginx.conf'
       - staticfiles_volume:/app/staticfiles
+      - '/etc/cloudflare-origin/origin.pem:/etc/nginx/certs/origin.pem:ro'
+      - '/etc/cloudflare-origin/origin.key:/etc/nginx/certs/origin.key:ro'
     depends_on:
       - app
     restart: always
