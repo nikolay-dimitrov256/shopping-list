@@ -33,3 +33,4 @@ jobs:
           port: ${{ secrets.VM_PORT }}
           username: ${{ secrets.VM_USERNAME }}
           key: ${{ secrets.KEY_TO_VM }}
+          script: ~/webapps/shopping-list/scripts/deploy.sh
