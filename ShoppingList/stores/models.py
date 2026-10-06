@@ -29,3 +29,4 @@ class Store(models.Model):
     class Meta:
         verbose_name = 'магазин'
         verbose_name_plural = 'магазини'
+        ordering = ['-is_global', 'name']

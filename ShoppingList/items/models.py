@@ -104,6 +104,7 @@ class Item(models.Model):
     class Meta:
         verbose_name = 'продукт'
         verbose_name_plural = 'продукти'
+        ordering = ['-is_urgent', 'created_at']
 
 
 class Category(models.Model):
@@ -118,3 +119,4 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
+        ordering = ['name']
