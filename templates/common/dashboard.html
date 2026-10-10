@@ -129,7 +129,7 @@
             {{ add_form.is_urgent.as_field_group }}
         </div>
         <div class="fieldWrapper">
-            {{ add_form.notes }}
+            {{ add_form.notes.as_field_group }}
         </div>
         <div class="buttons">
             <button type="reset" class="button btn-cancel">Откажи</button>
@@ -190,7 +190,7 @@
             {{ edit_form.is_urgent.as_field_group }}
         </div>
         <div class="fieldWrapper">
-            {{ edit_form.notes }}
+            {{ edit_form.notes.as_field_group }}
         </div>
         <div class="buttons">
             <button type="reset" class="button btn-cancel">Откажи</button>
@@ -240,6 +240,6 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{% static 'scripts/scripts.js' %}"></script>
+<script src="{% static 'scripts/scripts.js' %}?v=1"></script>
 <script src="{% static 'scripts/shopping-list-scritps.js' %}"></script>
 {% endblock %}

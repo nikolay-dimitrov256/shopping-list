@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', initPage);
 function initPage() {
     initActionsToggles();
 
-    initMenuToggle();
+    // initMenuToggle(); // Uncomment when mobile nav is in full usage
 
     initBooleanRanges();
 }
