@@ -19,8 +19,7 @@ services:
     restart: always
 
   app:
-    build: .
-    image: shopping-list
+    image: stryker256/shopping-list:1.0.0
     env_file:
       - .env
     container_name: shopping-list-container

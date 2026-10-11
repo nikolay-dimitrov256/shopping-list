@@ -10,4 +10,4 @@ git checkout main
 
 git reset --hard origin/main
 
-docker compose up -d --build
+docker compose up -d

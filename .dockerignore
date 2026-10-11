@@ -26,3 +26,5 @@ media/
 *.sqlite3
 
 logs/
+
+docker-compose.override.yml
