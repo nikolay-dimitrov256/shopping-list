@@ -10,4 +10,6 @@ git checkout main
 
 git reset --hard origin/main
 
+docker compose pull app
+
 docker compose up -d
